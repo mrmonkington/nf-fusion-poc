@@ -1,0 +1,44 @@
+process {
+  executor = 'awsbatch'
+  queue = 'general_software'
+}
+
+aws {
+  region = 'eu-west-1'
+  batch {
+    volumes = '/tmp:/mnt'
+  }
+}
+
+fusion {
+  // fusion filesystem enables transparent mounting
+  // of S3 as regular POSIX files
+  enabled = true
+}
+
+wave {
+  // Fusion requires wave container build
+  // It *is* probably possible to avoid using wave
+  // ...but wave brings other interesting nextflow native benefits
+  enabled = true
+  // wave can either:
+  //   - use an existing container image (not that useful)
+  //   - dynamically build your image from a local dockerfile (default and cool!)
+  //   - dynamically build a conda env in a nice compact conda container (wow - doesn't work tho!)
+  // strategy = ['dockerfile']
+  build {
+    // We'll use our own private repo since by default wave uses seqera's public repo
+    //   in AWS
+    // Note: you must set up tower with access keys for this repo
+    repository = 'xxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/xxxxxx'
+  }
+}
+
+tower {
+  enabled = true
+  accessToken = 'XXXXXXXXXXX'
+  workspaceId = 'XXXXXXXXXXX'
+}
+
+// useful for debugging
+report.overwrite = true
