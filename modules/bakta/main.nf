@@ -1,5 +1,10 @@
-process cat_file {
+process annotate {
+    memory = 8.GB
+    cpus = 4
+    scratch = false
+
     input: val(sampleName)
+
     // TODO get Conda builds working - conda 'bioconda:bakta=1.8.1'
     script:
         input_file = "/fusion/s3/microbesng-sandpit/fusion_poc/" + params.rundir + "/" + sampleName

@@ -1,6 +1,6 @@
-include { cat_file } from './modules/bakta'
+include { annotate } from './modules/bakta'
 
 workflow {
     input_ch = Channel.from( [ 'input.fna', ] )
-    input_ch | cat_file
+    input_ch | annotate
 }
