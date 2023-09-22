@@ -1,6 +1,6 @@
 process annotate {
-    memory = 32.GB
-    cpus = 8
+    memory = 8.GB
+    cpus = 2
     scratch = false
 
     input: val(sampleName)
