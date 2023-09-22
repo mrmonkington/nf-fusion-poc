@@ -1,6 +1,6 @@
 FROM mambaorg/micromamba
 
-RUN micromamba install -n base -y bakta=1.8.2 -c defaults -c bioconda -c conda-forge
+RUN micromamba install -n base -y bakta=1.8.1 -c defaults -c bioconda -c conda-forge
 RUN micromamba clean -afy
 USER root
 RUN apt update && apt install -y procps
